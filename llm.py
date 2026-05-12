@@ -1,10 +1,13 @@
 from groq import Groq
 import os
+import streamlit as st
 from dotenv import load_dotenv
 
 load_dotenv()
 
-client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+api_key = os.getenv("GROQ_API_KEY") or st.secrets["GROQ_API_KEY"]
+
+client = Groq(api_key=api_key)
 
 def generate_diet_plan(user_data):
     prompt = f"""
